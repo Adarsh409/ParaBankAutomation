@@ -4,26 +4,28 @@ class AccountPage
     constructor(page)
     {
         this.page = page;
-        this.accountNumber = this.page.getByRole("cell").first();
-
-        this.balance = this.page.getByRole("cell").nth(1);
-        this.availableAmount = this.page.getByRole("cell").nth(2);
+        this.accountNumber = this.page.getByRole("row").nth(1).getByRole('link')
+        this.balance = this.page.getByRole("row").nth(1).getByRole('cell').nth(1)
+        this.availableAmount = this.page.getByRole("row").nth(1).getByRole('cell').nth(2)
     }
 
 
     async printAccountNumber()
     {
-        return this.accountNumber;
+        const accountNumber = await this.accountNumber.textContent()
+        console.log(`Account Number: ${accountNumber}`)
     }
 
     async printBalanceAmount()
     {
-        return this.balance;
+        const balanceAmount = await this.balance.textContent()
+        console.log(`Balance Amount: ${balanceAmount}`)
     }
 
     async printAvailableAmount()
     {
-        return this.availableAmount;
+        const availableAmount = await this.availableAmount.textContent();
+        console.log(`Available Amount: ${availableAmount}`)
     }
 }
 

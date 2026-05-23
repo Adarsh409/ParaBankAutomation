@@ -15,7 +15,7 @@ Scenario: Account creation and verify successful login access
       | User Name  | Test User13         |
       | Password  | TestPass@123       |
     And User clicks Register button
-    Then Sucess message should be displayed
+    Then Success message should be displayed
     When User logs out of the application
     And User logs in with newly created credentials
-    Then Account dashboard should be visible
+    Then Account details should be visible

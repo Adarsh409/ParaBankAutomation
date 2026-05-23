@@ -22,7 +22,7 @@ When('User clicks Register button', async ({registrationPage}) => {
     await registrationPage.clickRegisterButton();
 });
 
-Then('Sucess message should be displayed', async ({registrationPage}) => {
+Then('Success message should be displayed', async ({registrationPage}) => {
   await registrationPage.verifyRegistrationSuccessMessage();
 });
 
@@ -35,6 +35,8 @@ When('User logs in with newly created credentials', async ({homePage,sharedState
     
 });
 
-Then('Account dashboard should be visible', async ({registrationPage}) => {
-    
+Then('Account details should be visible', async ({accountPage}) => {
+    await accountPage.printAccountNumber();
+    await accountPage.printBalanceAmount();
+    await accountPage.printAvailableAmount();
 });
