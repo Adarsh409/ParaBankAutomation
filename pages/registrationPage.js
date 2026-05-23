@@ -23,83 +23,93 @@ class RegistrationPage
         this.logoutLink = this.page.getByRole('link', { name: 'Log Out' })
     }
 
+    // Enters first name
     async enterFirstName(firstName)
     {
         await this.firstNameField.fill(firstName);
     }
 
+    // Enters last name
     async enterLastName(lastName)
     {
         await this.lastNameField.fill(lastName);
     }
 
+    // Enters address
     async enterAddress(address)
     {
         await this.addressField.fill(address)
     }
 
+    // Enters city
     async enterCity(city)
     {
         await this.cityField.fill(city)
     }
 
+    // Enters state
     async enterState(state)
     {
         await this.stateField.fill(state)
     }
 
+    // Enters zip
     async enterZipCode(zipCode)
     {
         await this.zipField.fill(zipCode)
     }
 
+    // Enters phone number
     async enterPhoneNumber(phoneNumber)
     {
         await this.phoneNumberField.fill(phoneNumber)
     }
 
+    // Enters SSN
     async enterSSN(ssn)
     {
         await this.ssnField.fill(ssn);
     }
 
+    // Enters username
     async enterUserName(username)
     {
         await this.userNameField.fill(username);
     }
 
+    // Enters password
     async enterPassword(password)
     {
         await this.passwordField.fill(password)
     }
 
+    // Enters password in confirm password field
     async enterConfirmPassword(password)
     {
         await this.confirmPasswordField.fill(password)
     }
 
+    // Clicks register button
     async clickRegisterButton()
     {
         await this.registerButton.click();
     }
 
-    async getRegistrationSuccessMessage()
-    {
-        console.log(await this.registrationSuccessMessage.textContent())
-    }
-
+   
+    // Clicks logout link
     async clickLogoutLink()
     {
         await this.logoutLink.click();
     }
 
     
-    
+    // Verifies registration success message
     async verifyRegistrationSuccessMessage()
     {
         await expect(this.registrationSuccessMessage).toHaveText(`Welcome ${this.username}`);
     }
 
+    // Enters registration details
     async enterRegistrationDetails(registrationData)
     {
         await this.enterFirstName(registrationData['First Name']);

@@ -10,21 +10,25 @@ class HomePage
         this.loginButton = this.page.getByRole('button', { name: 'Log In' })
     }
 
+    // Enters username for login
     async enterUserName(username)
     {
         await this.loginName.fill(username);
     }
 
+    //Enters password for login
     async enterPassword(password)
     {
         await this.loginPassword.fill(password)
     }
 
+    // Clicks Login button
     async clickLoginButton()
     {
         await this.loginButton.click();
     }
 
+    // User login
     async login(username,password)
     {
         await this.enterUserName(username);
@@ -32,11 +36,13 @@ class HomePage
         await this.clickLoginButton();
     }
 
+    // Clicks registration link
     async clickRegistrationLink()
     {
         await this.registrationLink.click();
     }
 
+    // Loads the application
     async loadApplication()
     {
         await this.page.goto('/')
