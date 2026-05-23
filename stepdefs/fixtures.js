@@ -1,11 +1,17 @@
-import {test as base} from 'playwright-bdd'
+const { test: base } = require('playwright-bdd');
+const { RegistrationPage } = require('../pages/registrationPage');
+const { AccountPage } = require('../pages/accountPage');
+const { HomePage } = require('../pages/homePage');
 
-import { RegistrationPage } from '../pages/registrationPage'
-import { AccountPage } from '../pages/accountPage'
-import { HomePage } from '../pages/homePage'
 
+const test = base.extend({
 
-exports.test = base.extend({
+  sharedState: async ({}, use) => {
+    await use({
+      registeredUsername: '',
+      registeredPassword: ''
+    });
+  },
   registrationPage: async ({ page }, use) => {
     const registrationPage = new RegistrationPage(page);
     await use(registrationPage);
@@ -22,3 +28,5 @@ exports.test = base.extend({
     await use(homePage)
   }
 });
+
+module.exports = { test };

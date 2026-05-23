@@ -1,9 +1,12 @@
-
+const { CredentialUtils } = require('../utils/credentials-utils');
+const { expect } = require('@playwright/test');
 class RegistrationPage
 {
     constructor(page)
     {
         this.page = page;
+        this.username = "";
+        this.password = "";
         this.firstNameField = this.page.locator("[id='customer.firstName']");
         this.lastNameField = this.page.locator('[id="customer.lastName"]');
         this.addressField = this.page.locator('[id="customer.address.street"]');
@@ -90,6 +93,13 @@ class RegistrationPage
         await this.logoutLink.click();
     }
 
+    
+    
+    async verifyRegistrationSuccessMessage()
+    {
+        await expect(this.registrationSuccessMessage).toHaveText(`Welcome ${this.username}`);
+    }
+
     async enterRegistrationDetails(registrationData)
     {
         await this.enterFirstName(registrationData['First Name']);
@@ -100,10 +110,17 @@ class RegistrationPage
         await this.enterZipCode(registrationData['Zip Code']);
         await this.enterPhoneNumber(registrationData['Phone']);
         await this.enterSSN(registrationData['SSN']);
-        await this.enterUserName(registrationData['User Name']);
-        await this.enterPassword(registrationData['Password']);
-        await this.enterConfirmPassword(registrationData['Password']);
+        this.username = CredentialUtils.generateUsername()
+        this.password = CredentialUtils.generatePassword()
+        await this.enterUserName(this.username);
+        await this.enterPassword(this.password);
+        await this.enterConfirmPassword(this.password);
+         return {
+                        username: this.username,
+                        password: this.password
+                };
     }
+
 }
 
 module.exports = {RegistrationPage}

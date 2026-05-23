@@ -3,14 +3,14 @@ import { test } from "../../stepdefs/fixtures.js";
 
 test.describe('User Account set up', () => {
 
-  test('Account creation and verify successful login access', async ({ Given, When, Then, And, homePage, registrationPage }) => { 
+  test('Account creation and verify successful login access', async ({ Given, When, Then, And, homePage, registrationPage, sharedState }) => { 
     await Given('User launches the application', null, { homePage }); 
     await When('User clicks the Register link', null, { homePage }); 
-    await And('User enters the following registration details:', {"dataTable":{"rows":[{"cells":[{"value":"First Name"},{"value":"Jane"}]},{"cells":[{"value":"Last Name"},{"value":"Doe"}]},{"cells":[{"value":"Address"},{"value":"123 Automation Way"}]},{"cells":[{"value":"City"},{"value":"Tech City"}]},{"cells":[{"value":"State"},{"value":"Karnataka"}]},{"cells":[{"value":"Zip Code"},{"value":"560001"}]},{"cells":[{"value":"Phone"},{"value":"9876543210"}]},{"cells":[{"value":"SSN"},{"value":"123-456-7890"}]},{"cells":[{"value":"User Name"},{"value":"Test User13"}]},{"cells":[{"value":"Password"},{"value":"TestPass@123"}]}]}}, { registrationPage }); 
+    await And('User enters the following registration details:', {"dataTable":{"rows":[{"cells":[{"value":"First Name"},{"value":"Jane"}]},{"cells":[{"value":"Last Name"},{"value":"Doe"}]},{"cells":[{"value":"Address"},{"value":"123 Automation Way"}]},{"cells":[{"value":"City"},{"value":"Tech City"}]},{"cells":[{"value":"State"},{"value":"Karnataka"}]},{"cells":[{"value":"Zip Code"},{"value":"560001"}]},{"cells":[{"value":"Phone"},{"value":"9876543210"}]},{"cells":[{"value":"SSN"},{"value":"123-456-7890"}]},{"cells":[{"value":"User Name"},{"value":"Test User13"}]},{"cells":[{"value":"Password"},{"value":"TestPass@123"}]}]}}, { registrationPage, sharedState }); 
     await And('User clicks Register button', null, { registrationPage }); 
     await Then('Sucess message should be displayed', null, { registrationPage }); 
     await When('User logs out of the application', null, { registrationPage }); 
-    await And('User logs in with newly created credentials', null, { registrationPage }); 
+    await And('User logs in with newly created credentials', null, { homePage, sharedState }); 
     await Then('Account dashboard should be visible', null, { registrationPage }); 
   });
 

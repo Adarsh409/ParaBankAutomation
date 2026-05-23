@@ -11,9 +11,11 @@ When('User clicks the Register link', async ({homePage})=> {
     await homePage.clickRegistrationLink();
 });
 
-When('User enters the following registration details:', async ({registrationPage},dataTable) =>{
+When('User enters the following registration details:', async ({registrationPage,sharedState},dataTable) =>{
     const registrationData = dataTable.rowsHash();
-    await registrationPage.enterRegistrationDetails(registrationData)
+    const credentials = await registrationPage.enterRegistrationDetails(registrationData)
+    sharedState.registeredUsername = credentials.username;
+    sharedState.registeredPassword = credentials.password;
 });
 
 When('User clicks Register button', async ({registrationPage}) => {
@@ -21,15 +23,15 @@ When('User clicks Register button', async ({registrationPage}) => {
 });
 
 Then('Sucess message should be displayed', async ({registrationPage}) => {
-  await registrationPage.getRegistrationSuccessMessage();
+  await registrationPage.verifyRegistrationSuccessMessage();
 });
 
 When('User logs out of the application', async ({registrationPage}) => {
     await registrationPage.clickLogoutLink();
 });
 
-When('User logs in with newly created credentials', async ({registrationPage}) => {
-  await registrationPage.login(username,password)
+When('User logs in with newly created credentials', async ({homePage,sharedState}) => {
+  await homePage.login(sharedState.registeredUsername,sharedState.registeredPassword)
     
 });
 
